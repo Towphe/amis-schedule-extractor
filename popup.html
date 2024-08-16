@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>AMIS Schedule Extractor 9000</title>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="styles.css" rel="stylesheet" />
+    </head>
+    <body>
+        <div class="main">
+            <h1>AMIS Schedule</h1>
+            <p>Download as</p>
+            <div id="buttons" class="buttons">
+                <button id="gcal-dl" class="func-but">
+                    <img class="logo" src="/media/logos/g-calendar.png" />
+                </button>
+                <button id="csv-dl" class="func-but text-but">
+                    CSV (.csv)
+                </button>
+                <button id="json-dl" class="func-but text-but">
+                    JSON (.json)
+                </button>
+            </div>
+            <p id="warning" class="warning">Warning: Not in AMIS</p>
+        </div>
+        <script src="popup.js"></script>
+    </body>
+    
+</html>

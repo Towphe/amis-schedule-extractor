@@ -1,0 +1,60 @@
+
+h1, h2, p {
+    margin: 0;
+}
+
+body {
+    margin: 0;
+}
+
+.main {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #333333;
+    background-color: #F2F2F2;
+    padding: 1rem;
+    border: 5px solid rgb(209, 34, 34);
+    margin: 0;
+}
+
+h1 {
+    font-size: 1.75rem;
+    margin-bottom: 0.25rem;
+}
+
+p {
+    margin-bottom: 0.25rem;
+}
+
+.buttons {
+    display: flex;
+    justify-content: start;
+    gap: 5px;
+}
+
+.logo {
+    /* width: 6rem; */
+    width: 100%;
+}
+
+.func-but {
+    display: block;
+    border-radius: 0.3rem;
+    width: 7rem;
+}
+
+.func-but:hover {
+    opacity: 0.8;
+    cursor: pointer;
+}
+
+.text-but {
+    padding-top: 0.475rem;
+    padding-bottom: 0.475rem;
+}
+
+.warning {
+    color: red;
+    font-size: 0.8rem;
+    margin-top: 0.15rem;
+    display: none;  /* none by default */
+}
