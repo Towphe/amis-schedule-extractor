@@ -5,7 +5,15 @@
   "description": "A simple web extension that allows extraction of AMIS schedules into various formats.",
   "permissions": ["activeTab", "downloads", "scripting"],
   "action": {
-    "default_popup": "popup.html"
+    "default_popup": "popup.html",
+    "default_icons" : {
+      "40": "media/icons/icon-40.png",
+      "128": "media/icons/icon-128.png"
+    }
+  },
+  "icons" : {
+    "40": "media/icons/icon-40.png",
+    "128": "media/icons/icon-128.png"
   },
   "content_scripts": [
      {
