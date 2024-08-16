@@ -1,6 +1,6 @@
 # UPLB AMIS Schedule Extractor
 ## Overview
-This is a simple browser extension that converts UPLB AMIS schedules into formats compatible with various calendar applications. This is influenced by Leonard Ang's similar [extension](https://github.com/drew-747/UPD-CRS-Schedule-Converter) but for UPD's CRS.
+This is a simple browser extension that converts UPLB AMIS schedules into formats compatible with various calendar applications. This is influenced by Leonard Ang's similar [extension](https://github.com/drew-747/UPD-CRS-Schedule-Converter) but for UPD's CRS. A video quickstart may be found [here](https://youtu.be/KZqEbwiemNo).
 ## Features
 - Convert UPLB AMIS Schedules into the following formats:
 	- Google Calendar export (.ics)
