@@ -128,11 +128,31 @@ async function initialize()
         chrome.tabs.query({active:true, currentWindow: true}, function(tabs) {
             chrome.scripting.executeScript({
                 target: {tabId: tabs[0].id},
-                function: () => document.documentElement.outerHTML
+                function: () => {
+                    console.log(window.location);
+                    if (!window.location.href.startsWith("https://amis.uplb.edu.ph/student/enrollment"))
+                    {
+                        return false;
+                    }
+                    return document.documentElement.outerHTML;
+                }
             }, (results) => {
+                console.log(results);
                 amisDOM = results[0].result;
-
-                extractSchedule(amisDOM);
+                if (amisDOM)
+                {
+                    extractSchedule(amisDOM);
+                } else {
+                    // disable other buttons when not in AMIS.
+                    // console.log("Not in AMIS...");
+                    const buttons = [document.getElementById("csv-dl"), document.getElementById("json-dl"), document.getElementById("gcal-dl")];
+                    for (let i=0; i<buttons.length;i++)
+                    {
+                        buttons[i].setAttribute("disabled", "disabled");
+                        buttons[i].style.setProperty("cursor", "not-allowed");
+                    }
+                    document.getElementById("warning").style.setProperty("display", "block");
+                }
             })
         });
 
