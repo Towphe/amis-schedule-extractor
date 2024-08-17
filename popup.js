@@ -101,6 +101,8 @@ function extractSchedule(amisDOM)
             // add subject to list
             enlistedSubjects.push(enlistedSubject);
         }
+
+        document.getElementById("status").innerHTML = `Status: <span style="color: green; font-weight:bold;">READY</span>`;
         console.log(enlistedSubjects);
     }, 2000);
 }
@@ -290,14 +292,13 @@ async function initialize()
                     extractSchedule(amisDOM);
                 } else {
                     // disable other buttons when not in AMIS.
-                    // console.log("Not in AMIS...");
                     const buttons = [document.getElementById("csv-dl"), document.getElementById("json-dl"), document.getElementById("gcal-dl")];
                     for (let i=0; i<buttons.length;i++)
                     {
                         buttons[i].setAttribute("disabled", "disabled");
                         buttons[i].style.setProperty("cursor", "not-allowed");
                     }
-                    document.getElementById("warning").style.setProperty("display", "block");
+                    document.getElementById("status").innerHTML = `Status: <span style="color: red; font-weight:bold;">ERROR</span>`;
                 }
             })
         });
