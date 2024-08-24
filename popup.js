@@ -22,7 +22,7 @@ function extractSchedule(amisDOM)
             const subjectInfoDOM = esd.children;
 
             // skip if enlistment status is not enlisted/finalized
-            if (subjectInfoDOM[2].children[0].innerHTML.trim() != "Enlisted" && subjectInfoDOM[2].children[0].innerHTML.trim() != "Finalized")
+            if (subjectInfoDOM[2].children[0].innerHTML.trim() != "Enlisted" || subjectInfoDOM[2].children[0].innerHTML.trim() != "Finalized")
             {
                 // not enlisted/finalized
                 continue;

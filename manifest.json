@@ -1,9 +1,9 @@
 {
   "manifest_version": 3,
   "name": "UPLB AMIS Schedule Extractor",
-  "version": "1.0",
+  "version": "1.1",
   "description": "A simple web extension that allows extraction of AMIS schedules into various formats.",
-  "permissions": ["activeTab", "downloads", "scripting"],
+  "permissions": ["activeTab", "scripting"],
   "action": {
     "default_popup": "popup.html",
     "default_icons" : {
