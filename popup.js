@@ -11,7 +11,7 @@ function extractSchedule(amisDOM)
 
     setTimeout(() => {
         enlistedSubjectsDOM = doc.querySelector("#active-enlistment > div.bg-white.shadow-lg.sm\\:rounded-lg.mb-4 > table > tbody").children;
-
+        
         for (let esd of enlistedSubjectsDOM)
         {
             // esd[0] contains lecture class information
@@ -22,7 +22,7 @@ function extractSchedule(amisDOM)
             const subjectInfoDOM = esd.children;
 
             // skip if enlistment status is not enlisted/finalized
-            if (subjectInfoDOM[2].children[0].innerHTML.trim() != "Enlisted" || subjectInfoDOM[2].children[0].innerHTML.trim() != "Finalized")
+            if (subjectInfoDOM[2].children[0].innerHTML.trim() != "Enlisted" && subjectInfoDOM[2].children[0].innerHTML.trim() != "Finalized") //  || 
             {
                 // not enlisted/finalized
                 continue;
@@ -54,11 +54,11 @@ function extractSchedule(amisDOM)
             enlistedSubject.lectureDays = [];
             for (let day of lectureDays)
             {
-                Subject.lectureDays.push(day.innerText.trim());
+                enlistedSubject.lectureDays.push(day.innerText.trim());
             }
 
-            Subject.lectureFIC = lectureBody.children[1].children[0].innerText.split(": ")[1].trim();
-            Subject.lectureLocation = lectureBody.children[1].children[1].innerText.split(": ")[1].trim();
+            enlistedSubject.lectureFIC = lectureBody.children[1].children[0].innerText.split(": ")[1].trim();
+            enlistedSubject.lectureLocation = lectureBody.children[1].children[1].innerText.split(": ")[1].trim();
 
             // get laboratory info (if any)
             const labInfoDOM = subjectInfoDOM[1].children[0];
@@ -68,42 +68,43 @@ function extractSchedule(amisDOM)
             {
                 // process lab info
                 // console.log(labInfoDOM);
-                Subject.laboratorySection = labInfoDOM.getElementsByTagName("button")[0].innerText.split(" - ")[1].split("\n")[0];
+                enlistedSubject.laboratorySection = labInfoDOM.getElementsByTagName("button")[0].innerText.split(" - ")[1].split("\n")[0];
 
                 // extract DOM of lecture content [0] contains time and days, [1] contains faculty and location
                 const labBody = subjectInfoDOM[1].children[0].children[1].children[0].children[0];
                 
                 let labTime = labBody.children[0].innerText.trim().split(": ")[1].substring(1,18);
-                Subject.labTimeStart = labTime.split(" - ")[0];
-                Subject.labTimeEnd = labTime.split(" - ")[1];
+                enlistedSubject.labTimeStart = labTime.split(" - ")[0];
+                enlistedSubject.labTimeEnd = labTime.split(" - ")[1];
 
                 let labDays = labBody.children[0].children[1].getElementsByTagName("div");
-                Subject.labDays = [];
+                enlistedSubject.labDays = [];
                 for (let day of labDays)
                 {
-                    Subject.labDays.push(day.innerText.trim());
+                    enlistedSubject.labDays.push(day.innerText.trim());
                 }
 
-                Subject.labFIC = labBody.children[1].children[0].innerText.split(": ")[1].trim();
-                Subject.labLocation = labBody.children[1].children[1].innerText.split(": ")[1].trim();
+                enlistedSubject.labFIC = labBody.children[1].children[0].innerText.split(": ")[1].trim();
+                enlistedSubject.labLocation = labBody.children[1].children[1].innerText.split(": ")[1].trim();
             }
             else
             {
                 // temporary null lab/recit marker
-                Subject.laboratorySection = null;
-                Subject.labTimeStart = null;
-                Subject.labTimeEnd = null;
-                Subject.labDays = null;
-                Subject.labFIC = null;
-                Subject.labLocation = null;
+                enlistedSubject.laboratorySection = null;
+                enlistedSubject.labTimeStart = null;
+                enlistedSubject.labTimeEnd = null;
+                enlistedSubject.labDays = null;
+                enlistedSubject.labFIC = null;
+                enlistedSubject.labLocation = null;
             }
 
             // add subject to list
-            Subjects.push(Subject);
+            enlistedSubjects.push(enlistedSubject);
         }
 
+        console.log("Here outside loop");
+
         document.getElementById("status").innerHTML = `Status: <span style="color: green; font-weight:bold;">READY</span>`;
-        console.log(Subjects);
     }, 2000);
 }
 
