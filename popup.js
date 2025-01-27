@@ -88,9 +88,7 @@ function extractSchedule(amisDOM) {
         lectureBody.children[1].children[1].innerText.split(": ")[1].trim();
 
       // get laboratory info (if any)
-      // const labInfoDOM = subjectInfoDOM[1].children[0].children[0].children[0];
       const labInfoDOM = subjectInfoDOM[0].children[1];
-      console.log(labInfoDOM);
 
       // check first if lab is existent
       if (labInfoDOM.innerHTML.trim() !== "-- No associated class --") {
@@ -114,7 +112,7 @@ function extractSchedule(amisDOM) {
         enlistedSubject.labTimeStart = labTime.split(" - ")[0];
         enlistedSubject.labTimeEnd = labTime.split(" - ")[1];
 
-        console.log(enlistedSubject);
+        // console.log(enlistedSubject);
 
         let labDays =
           labBody.children[0].children[1].getElementsByTagName("div");
@@ -140,7 +138,7 @@ function extractSchedule(amisDOM) {
       }
 
       // add subject to list
-      console.log(enlistedSubject);
+      // console.log(enlistedSubject);
       enlistedSubjects.push(enlistedSubject);
     }
 
@@ -154,10 +152,15 @@ function extractSchedule(amisDOM) {
  * @param {Date} date
  */
 function formatDate(date) {
+  // console.log(date.getDate());
+
   // return timezone compliant date
   let formattedDate = new Date(
-    `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()} 01:00:00`,
+    `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()} 12:00:00`,
   );
+
+  console.log(formattedDate);
+  console.log(formattedDate.toISOString().replace(/[-:]/g, "").split("T")[0]);
 
   return formattedDate.toISOString().replace(/[-:]/g, "").split("T")[0];
 }
@@ -354,6 +357,7 @@ async function initialize() {
         const start = parseTime(course.startTime);
         const end = parseTime(course.endTime);
         const eventStart = getNextDayOfWeek(startDate, dayAbbr);
+        console.log(eventStart)
         icsContent += "BEGIN:VEVENT\n";
         icsContent += `SUMMARY:${course.subject}\n`;
         icsContent += `RRULE:FREQ=WEEKLY;BYDAY=${dayAbbr};UNTIL=${formatDate(endDate)}T235959Z\n`; // T235959Z
@@ -362,6 +366,8 @@ async function initialize() {
         icsContent += "END:VEVENT\n";
       }
       icsContent += "END:VCALENDAR";
+
+      console.log(icsContent)
 
       const blob = new Blob([icsContent], {
         type: "text/calendar",
@@ -415,5 +421,6 @@ async function initialize() {
 document.addEventListener("DOMContentLoaded", () => {
   initialize().then(() => {
     // do something
+    console.log(enlistedSubjects);
   });
 });
